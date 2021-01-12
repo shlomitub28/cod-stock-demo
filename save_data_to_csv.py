@@ -5,8 +5,8 @@ import argparse
 import os
 
 def save_dataset(symbol, time_window):
-    credentials = json.load(open('creds.json', 'r'))
-    api_key = credentials['av_api_key']
+    
+    api_key = os.environ["API_KEY"]
     print(symbol, time_window)
     ts = TimeSeries(key=api_key, output_format='pandas')
     if time_window == 'intraday':
@@ -17,7 +17,7 @@ def save_dataset(symbol, time_window):
     elif time_window == 'daily_adj':
         data, meta_data = ts.get_daily_adjusted(symbol, outputsize='full')
 
-    pprint(data.tail(1))
+#    pprint(data.tail(1))
 
     os.makedirs(f"./files/data/{symbol}", exist_ok=True)
     data.to_csv(f'./files/data/{symbol}/{symbol}_{time_window}.csv')

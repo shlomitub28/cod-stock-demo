@@ -1,0 +1,6 @@
+keras
+tensorflow
+sklearn
+alpha_vantage
+numpy
+pandas
