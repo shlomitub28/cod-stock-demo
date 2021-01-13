@@ -3,6 +3,8 @@ from pprint import pprint
 import json
 import argparse
 import os
+from csv import DictReader
+from db import Db
 
 def save_dataset(symbol, time_window):
     
@@ -22,7 +24,20 @@ def save_dataset(symbol, time_window):
     os.makedirs(f"./files/data/{symbol}", exist_ok=True)
     data.to_csv(f'./files/data/{symbol}/{symbol}_{time_window}.csv')
 
-
+def upsert_data(symbol, time_window):
+ 
+  with open(f'./files/data/{symbol}/{symbol}_{time_window}.csv', 'r') as read_obj:
+    csv_dict_reader = DictReader(read_obj)
+    for row in csv_dict_reader:
+        data = {'symbol':f"{symbol}",'datet':f"{row['date']}",\
+            'open_val':f"{row['1. open']}",'high_val':f"{row['2. high']}",\
+            'low_val':f"{row['3. low']}",'close_val':f"{row['4. close']}", \
+            'volume':f"{row['5. volume']}"}
+        print(data)
+        model=Db()
+        model.upsert(data)
+  
+    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 

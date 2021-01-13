@@ -4,3 +4,4 @@ sklearn
 alpha_vantage
 numpy
 pandas
+phoenixdb

@@ -11,7 +11,6 @@ not_to_use = []
 bought=['MCD','NKE','ZNGA','BABA','AMZN','QRVO','COST','MSFT']
 t = 1
 for symbol in symbols:
-    #if not path.exists(f"./files/data/{symbol}"):
     save_dataset(symbol,'daily')
     run_model(symbol)
     p = Predict(symbol)
