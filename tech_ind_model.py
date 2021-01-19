@@ -30,8 +30,8 @@ def run_model(symbol,plot=False):
 
     unscaled_y_test = unscaled_y[n:]
 
-    print(ohlcv_train.shape)
-    print(ohlcv_test.shape)
+    print("Training Shape " + str(ohlcv_train.shape))
+    print("Testing Shape " + str(ohlcv_test.shape))
 
 
     # model architecture
@@ -74,10 +74,10 @@ def run_model(symbol,plot=False):
     assert unscaled_y_test.shape == y_test_predicted.shape
     real_mse = np.mean(np.square(unscaled_y_test - y_test_predicted))
     scaled_mse = real_mse / (np.max(unscaled_y_test) - np.min(unscaled_y_test)) * 100
-    print(scaled_mse)
+    #print(scaled_mse)
     if plot:
         import matplotlib
-        matplotlib.use('MacOSX')
+        #matplotlib.use('MacOSX')
         import matplotlib.pyplot as plt
 
         plt.gcf().set_size_inches(22, 15, forward=True)

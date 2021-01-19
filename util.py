@@ -3,14 +3,28 @@ from sklearn import preprocessing
 import numpy as np
 np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
 history_points = 50
+from db import Db
+import sys
 
 
-def get_raw_data(symbol):
+def get_raw_data(symbol,print_sample=True):
+    """
     data = pd.read_csv(f'./files/data/{symbol}/{symbol}_daily.csv')
     data = data.drop('date', axis=1)
     data = data.drop(0, axis=0)
-
-    return data.values
+    print(data.head(5))
+    print(data.count())
+    """
+    model = Db()
+    records = model.get_data(symbol)
+    
+    data = pd.DataFrame(data = records, 
+                         columns = ['open_val','high_val','low_val','close_val','volume'])
+    data = data.drop(0, axis=0)
+    if print_sample:
+      print(data.head(5))
+      print(data.count())
+    return data.to_numpy()
 
 
 def csv_to_dataset(symbol):

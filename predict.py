@@ -37,7 +37,7 @@ class Predict():
         x = 0
         transactions = "buy"
         signal = ""
-#175.25
+
         for price in self.current_price:
             if x == 0:
                 starting_price = price
@@ -77,8 +77,7 @@ class Predict():
 
             x += 1
         self.predicted_open_price_tomorrow = last_pred_price
-        # print(price)
-        # print(self.recommandations)
+        
 
     def calculate_earnings(self):
         self.collect_earnings()
@@ -86,10 +85,7 @@ class Predict():
         prev_price = -1
         first_price = 0
         for trans in self.recommandations:
-            # key , value = trans.items()
-            # for key in trans:
-            #   value = trans[key]
-            #print(trans)
+            
             if prev_price == -1:
                 if trans['signal'] == "negative" or trans['signal'] == "low":
                     continue
@@ -98,7 +94,7 @@ class Predict():
                     first_price = trans['price']
                     first_predicted = trans['predicted']
                     prev_predicted = trans['predicted']
-                    # print(f"bought in {value}")
+                    
 
                     continue
             if trans['recommendation'] == "buy":
@@ -120,7 +116,7 @@ class Predict():
         # return revenue, percent, first_price,value,
 
     def predict_last_values(self, symbol, last=0):
-        data = get_raw_data(symbol)
+        data = get_raw_data(symbol,False)
         data_normaliser = preprocessing.MinMaxScaler()
         data_normalised = data_normaliser.fit_transform(data)
         next_day_open_values = get_next_day_open_values(data)
