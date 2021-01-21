@@ -9,13 +9,13 @@ np.random.seed(4)
 #from tensorflow import set_random_seed
 #set_random_seed(4)
 tf.random.set_seed(4)
-from util import csv_to_dataset, history_points
+from util import create_dataset, history_points
 
 def run_model(symbol,plot=False):
 
     # dataset
 
-    ohlcv_histories, technical_indicators, next_day_open_values, unscaled_y, y_normaliser = csv_to_dataset(symbol)
+    ohlcv_histories, technical_indicators, next_day_open_values, unscaled_y, y_normaliser = create_dataset(symbol)
 
     test_split = 0.9
     n = int(ohlcv_histories.shape[0] * test_split)
