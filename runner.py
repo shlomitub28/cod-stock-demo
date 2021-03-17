@@ -7,13 +7,13 @@ import time
 import os.path
 from os import path
 
-symbols=['NLOK','AMD','QRVO','NVDA','AAPL','AMZN','GOOGL','FB','ORCL','CSCO','IBM','UBER','LYFT','COST',
-         'MCD','BA','AAL','MSFT','GM','KO','QCOM','BABA','UAA','SCON','HPQ','ZNGA','GM','QCOM','JBLU','XRX']
-not_to_use = []
-bought=['MCD','NKE','ZNGA','BABA','AMZN','QRVO','COST','MSFT']
-test = ['ADBE']
+symbols=['NLOK','AMD','QRVO','NVDA','AAPL','AMZN', 
+         'GOOGL','FB','ORCL','CSCO','IBM','UBER','LYFT','COST',
+         'MCD','BA','AAL','MSFT','GM','KO','QCOM','BABA','UAA',
+         'SCON','HPQ','ZNGA','GM','QCOM','JBLU','XRX','ADBE']
+
 t = 1
-for symbol in test:
+for symbol in symbols:
     data = get_dataset(symbol,'daily')
     upsert_data(symbol,data)
     run_model(symbol,True)
